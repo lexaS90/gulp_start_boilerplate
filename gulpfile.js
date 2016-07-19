@@ -90,7 +90,7 @@ gulp.task('bootstrap', function () {
  */
 
  gulp.task('js', function () {
-  return gulp.src('app/js/main.js')
+  return gulp.src('app/js/*.js')
     .pipe(reload({stream: true}));
 });
 
