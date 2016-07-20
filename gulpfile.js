@@ -113,15 +113,18 @@ gulp.task('watch', function(){
 
  gulp.task('default', ['watch', 'server']);
 
-/* ======================= Dist ======================= */
 
+ 
+ 
+ /* ======================= Dist ======================= */
+var dist = "dist/";
 
 /*
  *	Удаляем папку dist перед сборкой
  */
 
  gulp.task('clean', function(){
- 	return del.sync('dist');
+ 	return del.sync(dist);
  	});
 
 
@@ -134,7 +137,7 @@ gulp.task('watch', function(){
  	.pipe(useref())
  	.pipe(gulpif('*.js', uglify()))
  	.pipe(gulpif('*.css', cleanCSS({compatibility: 'ie8'})))
- 	.pipe(gulp.dest('dist/'));
+ 	.pipe(gulp.dest(dist));
  	});
 
 
@@ -143,9 +146,8 @@ gulp.task('watch', function(){
  */
 
  gulp.task('fonts', function (){
- 	gulp.src('app/fonts/*')
- 	.pipe(filter(['*.eot', '*.svg', '*.ttf', '*.woff', '*.woff2']))
- 	.pipe(gulp.dest('dist/fonts/'));
+ 	gulp.src('app/fonts/**/*')
+ 	.pipe(gulp.dest(dist + 'fonts/'));
  	});
 
 
@@ -161,7 +163,7 @@ gulp.task('watch', function(){
  		svgoPlugins: [{removeViewBox: false}],
  		use: [pngquant()]
 	})))
- 	.pipe(gulp.dest('dist/img'));
+ 	.pipe(gulp.dest(dist + 'img'));
  	});
 
 
@@ -174,17 +176,17 @@ gulp.task('watch', function(){
  		'app/*.*',
  		'!app/*.html'
  		])
- 	.pipe(gulp.dest('dist/'))
+ 	.pipe(gulp.dest(dist))
 
  	gulp.src([
  		'app/css/main.css'
  		])
- 	.pipe(gulp.dest('dist/css/'))
+ 	.pipe(gulp.dest(dist + 'css/'))
 
  	 	gulp.src([
  		'app/js/main.js'
  		])
- 	.pipe(gulp.dest('dist/js/'))
+ 	.pipe(gulp.dest(dist + 'js/'))
  	});
 
 
@@ -193,7 +195,7 @@ gulp.task('watch', function(){
  */
 
 gulp.task('dist', ['useref', 'fonts', 'images', 'extras'], function(){
- 	return gulp.src('dist/**/*')
+ 	return gulp.src(dist + "**/*")
  	.pipe(size({'title' : 'build'}));
 });
 
