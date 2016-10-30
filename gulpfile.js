@@ -52,7 +52,7 @@ var sass 					= require('gulp-sass');
  */
 
 gulp.task('extend', function () {
-    gulp.src('app/html/page/*')
+    gulp.src('app/html/page/*.html')
         .pipe(extender({annotations:false,verbose:false}))
        	.pipe(prettify({indent_size: 2}))
         .pipe(gulp.dest('app/'))
@@ -67,7 +67,7 @@ gulp.task('extend', function () {
  */
 
 gulp.task('sass', function () {
-  return gulp.src('app/scss/**/*.scss')
+  return gulp.src('app/scss/**/main.scss')
     .pipe(sass({includePaths: require('node-bourbon').includePaths}).on('error', sass.logError))
     .pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
     .pipe(gulp.dest('app/css/'))
@@ -81,7 +81,8 @@ gulp.task('sass', function () {
 gulp.task('bootstrap', function () {
   return gulp.src('app/scss/bootstrap.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('app/css/'));
+    .pipe(gulp.dest('app/css/'))
+    .pipe(reload({stream: true}));
 });
 
 
@@ -101,6 +102,7 @@ gulp.task('bootstrap', function () {
 
 gulp.task('watch', function(){
 	gulp.watch('app/html/**/*.html', ['extend']);
+  gulp.watch('app/scss/**/bootstrap.scss', ['bootstrap']);
 	gulp.watch('app/scss/**/*.scss', ['sass']);
 	gulp.watch('app/js/**/*.js', ['js']);
 	gulp.watch('bower.json', ['wiredep']);	

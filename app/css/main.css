@@ -71,7 +71,58 @@ textarea {
  * 	Example
  *	@include font-face("OpenSans", "fonts/OpenSans/OpenSansRegular/OpenSansRegular", $file-formats: eot woff2 woff);
  */
+.header {
+  background-color: red; }
+  .header__logo {
+    background-color: green; }
+  .header__contact {
+    background-color: gold; }
+
 /**/
+.header {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px; }
+  .header::after {
+    clear: both;
+    content: "";
+    display: table; }
+  @media (min-width: 768px) {
+    .header {
+      width: 750px; } }
+  @media (min-width: 992px) {
+    .header {
+      width: 970px; } }
+  @media (min-width: 1200px) {
+    .header {
+      width: 1170px; } }
+  .header .header-wrap {
+    margin-left: -15px;
+    margin-right: -15px; }
+    .header .header-wrap::after {
+      clear: both;
+      content: "";
+      display: table; }
+  .header__logo {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px; }
+    @media (min-width: 992px) {
+      .header__logo {
+        float: left;
+        width: 16.66667%; } }
+  .header__contact {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px; }
+    @media (min-width: 992px) {
+      .header__contact {
+        float: left;
+        width: 50%; } }
+
 /*==========  Desktop First Method  ==========*/
 /* Large Devices, Wide Screens */
 @media only screen and (max-width: 1200px) {
